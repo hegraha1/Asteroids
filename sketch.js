@@ -19,7 +19,7 @@ function draw() {
   
 for(let i = 0; i < 5; i++){
     if(ship.hits(asteroids[i])){
-      alert('oops');
+      print('oops');
     }
   }
   for (let i = 0; i < asteroids.length; i++) {
