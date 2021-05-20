@@ -12,16 +12,23 @@ function setup() {
 
 function draw() {
   background(0);
-  
+
+  for (let i = 0; i < asteroids.length; i++) {
+    if (ship.hits(asteroids[i])) {
+      console.log("oops!");
+      if (asteroids[i].r > 10) {
+        var newAsteroids = asteroids[i].breakup();
+        asteroids = asteroids.concat(newAsteroids);
+      }
+      asteroids.splice(i, 1);
+      break;
+    }
+  }
+
   ship.render();
   ship.control();
   ship.update();
-  
-for(let i = 0; i < 5; i++){
-    if(ship.hits(asteroids[i])){
-      print('oops');
-    }
-  }
+
   for (let i = 0; i < asteroids.length; i++) {
     asteroids[i].render();
     asteroids[i].update();
@@ -36,7 +43,7 @@ for(let i = 0; i < 5; i++){
       for (let j = asteroids.length - 1; j >= 0; j--) {
         if (lasers[i].hits(asteroids[j])) {
           if (asteroids[j].r > 10) {
-            var newAsteroids = asteroids[j].breakup();
+            let newAsteroids = asteroids[j].breakup();
             asteroids = asteroids.concat(newAsteroids);
           }
           asteroids.splice(j, 1);
